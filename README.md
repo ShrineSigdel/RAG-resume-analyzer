@@ -315,6 +315,3 @@ Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
 
 Project Link: [https://github.com/yourusername/RAG-resume-analyzer](https://github.com/yourusername/RAG-resume-analyzer)
 
----
-
-Made with ❤️ and ☕
