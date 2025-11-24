@@ -11,13 +11,13 @@ class VectorStore:
             persist_directory=str(settings.CHROMA_PERSIST_DIR),
         )
 
-    def add_documents(self, doc_embeddings: list):
-        uuids = [str(uuid4()) for _ in range(len(doc_embeddings))]
-        self.vector_store.add_documents(documents=doc_embeddings, ids=uuids)
+    def add_documents(self, documents: list):
+        uuids = [str(uuid4()) for _ in range(len(documents))]
+        self.vector_store.add_documents(documents=documents, ids=uuids)
 
-    def query(self, query_embeddings: str, top_k: int = 3):
+    def query(self, query: str, top_k: int = 3):
         results = self.vector_store.similarity_search(
-            query_embeddings,
+            query,
             k=top_k
         )
         return results

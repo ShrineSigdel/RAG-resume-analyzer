@@ -2,14 +2,7 @@ from fastapi import APIRouter, UploadFile
 from datetime import datetime, timezone
 from app.utils.file_handler import save_upload_file
 from app.services.rag_pipeline import rag_pipeline
-router = APIRouter()
-
-@router.get("/upload")
-def upload():
-    return {
-        "status": "upload",
-        "timestamp":datetime.now(timezone.utc).isoformat()
-    }   
+router = APIRouter() 
     
 @router.post("/upload")
 async def upload_file(file: UploadFile):

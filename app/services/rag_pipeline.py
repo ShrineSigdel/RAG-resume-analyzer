@@ -1,6 +1,7 @@
 from app.services.document_loader import document_loader
 from app.services.vector_store import vector_store
 from app.services.gemini_service import gemini_service
+from app.prompts.templates import RESUME_ANALYSIS_PROMPT
 import logging
 
 logger = logging.getLogger(__name__)
@@ -22,12 +23,12 @@ class RAGPipeline:
             logger.error(f"Error during document ingestion: {e}")
             raise
 
-    def answer_questions(self, user_query: str) -> str:
+    async def answer_questions(self, user_query: str) -> str:
         """Process user query and return generated response."""
         try:
             relevant_docs = self.vector_store.query(user_query)
             context = "\n".join([doc.page_content for doc in relevant_docs])
-            prompt = f"Context: {context}\n\nQuestion: {user_query}"
+            prompt = RESUME_ANALYSIS_PROMPT.format(context=context, user_query=user_query)
             response = self.gemini_service.generate_response(prompt)
             return response
         except Exception as e:
